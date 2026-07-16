@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CRYPTUS · Карта публичных ресурсов</title>
+<style>
+  :root{
+    --bg:#0b0e13; --card:#151b28; --card2:#1a2230; --line:#242e40; --line2:#2f3b52;
+    --txt:#e7ecf4; --mut:#8a97ad; --mut2:#657084;
+    --red:#ff5d6c; --amber:#f5b13d; --green:#3ddc8b; --blue:#5aa9ff; --purple:#b98bff;
+    --r:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:linear-gradient(180deg,#0a0d12,#0b0e13 260px);color:var(--txt);
+    font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;padding-bottom:120px}
+  a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 18px}
+
+  header.hero{padding:34px 0 16px;border-bottom:1px solid var(--line)}
+  .kicker{color:var(--mut2);letter-spacing:.14em;text-transform:uppercase;font-size:11px;font-weight:700}
+  h1{margin:.3em 0 .12em;font-size:30px;letter-spacing:-.02em;font-weight:800}
+  .sub{color:var(--mut);max-width:900px}.sub b{color:var(--txt)}
+  .stats{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0 6px}
+  .stat{flex:1 1 120px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px 15px}
+  .stat .n{font-size:25px;font-weight:800;line-height:1}.stat .l{color:var(--mut);font-size:12px;margin-top:5px}
+  .stat.green .n{color:var(--green)}.stat.blue .n{color:var(--blue)}.stat.amber .n{color:var(--amber)}
+  .prog{margin:14px 0 2px}.prog .bar{height:9px;background:var(--card);border:1px solid var(--line);border-radius:99px;overflow:hidden}
+  .prog .fill{height:100%;background:linear-gradient(90deg,var(--green),#2bb673);width:0;transition:.3s}
+  .prog .lbl{color:var(--mut);font-size:12.5px;margin-top:6px}.prog .lbl b{color:var(--green)}
+
+  .note{margin:20px 0 4px;background:linear-gradient(180deg,#161d2b,transparent);border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;padding:13px 16px;color:var(--mut);font-size:13.5px}
+  .note b{color:var(--txt)}
+
+  .toolbar{position:sticky;top:0;z-index:30;background:rgba(11,14,19,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:10px 0;margin:18px 0 6px}
+  .toolbar .wrap{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .chip{border:1px solid var(--line2);background:var(--card);color:var(--mut);border-radius:999px;padding:6px 13px;font-size:12.5px;cursor:pointer;user-select:none;font-weight:600;white-space:nowrap}
+  .chip:hover{color:var(--txt)}.chip.on{background:var(--txt);color:#0b0e13;border-color:var(--txt)}
+  .search{flex:1 1 160px;min-width:130px;background:var(--card);border:1px solid var(--line2);color:var(--txt);border-radius:999px;padding:7px 14px;font-size:13px;outline:none}
+  .search:focus{border-color:var(--blue)}
+
+  section{margin:28px 0}
+  .sec-head{display:flex;align-items:baseline;gap:11px;margin-bottom:4px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .sec-head h2{font-size:18px;margin:0}.sec-head .cnt{color:var(--mut2);font-size:13px;font-weight:600}
+  .sec-desc{color:var(--mut);font-size:13px;margin:8px 0 14px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+  .item{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:.12s}
+  .item:hover{border-color:var(--line2)}
+  .item.done{opacity:.5}
+  .shot{display:block;aspect-ratio:16/10;background:var(--card2);overflow:hidden;position:relative;border-bottom:1px solid var(--line)}
+  .shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+  .shot .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--mut2);font-size:34px}
+  .shot .st{position:absolute;top:8px;right:8px;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:6px;background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
+  .st.live{color:var(--green)}.st.dead{color:var(--mut2)}.st.arch{color:var(--blue)}.st.redirect{color:var(--amber)}.st.unknown{color:var(--mut)}
+  .body{padding:12px 14px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .body .name{font-weight:700;font-size:14.5px;line-height:1.3}
+  .body .type{color:var(--mut2);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+  .u{font-size:12px;word-break:break-all}
+  .what{color:var(--mut);font-size:12.5px;flex:1}
+  .flag{font-size:12px;background:#231a12;border:1px solid #4a3820;color:var(--amber);border-radius:7px;padding:6px 9px}
+  .flag.priv{background:#1e1830;border-color:#3d2f57;color:var(--purple)}
+  .foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:8px;border-top:1px solid var(--line);margin-top:2px}
+  .foot label{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--mut);cursor:pointer;user-select:none}
+  .foot input{width:16px;height:16px;accent-color:var(--green);cursor:pointer}
+  .open{font-size:12px;font-weight:600}
+
+  .cart{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(16,20,28,.95);backdrop-filter:blur(12px);border-top:1px solid var(--line2);padding:11px 0}
+  .cart .wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .cart .c-lbl{color:var(--mut);font-size:13px;flex:1;min-width:120px}.cart .c-lbl b{color:var(--txt)}
+  .btn{border:0;border-radius:9px;padding:9px 15px;font-size:13px;font-weight:700;cursor:pointer}
+  .btn.primary{background:var(--blue);color:#04122a}.btn.ghost{background:transparent;border:1px solid var(--line2);color:var(--txt)}
+  .btn:active{transform:translateY(1px)}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:12px;color:var(--mut)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}.dot{width:9px;height:9px;border-radius:3px}
+  .footer{color:var(--mut2);font-size:12px;text-align:center;margin:36px 0 8px;line-height:1.7}
+  @media(max-width:560px){h1{font-size:24px}.grid{grid-template-columns:1fr}}
+  .hidden{display:none!important}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Карта публичных ресурсов · для юристов и команды · <span id="date">2026</span></div>
+    <h1>CRYPTUS — все публичные ресурсы</h1>
+    <p class="sub">Полный список сущностей бренда <b>CRYPTUS / Cryptus Media / UNION</b>, которые находятся в интернете: сайты, воронки, лендинги, курсы, каналы, боты, страницы. Каждая — <b>кликабельна, со скриншотом</b>. Пройдите список и отметьте закрытые галочкой «✓ закрыто» — прогресс сохраняется в браузере.</p>
+    <div class="stats">
+      <div class="stat"><div class="n" id="s-total">0</div><div class="l">ресурсов всего</div></div>
+      <div class="stat blue"><div class="n" id="s-ours">0</div><div class="l">наши активы</div></div>
+      <div class="stat green"><div class="n" id="s-live">0</div><div class="l">живых сейчас</div></div>
+      <div class="stat amber"><div class="n" id="s-flag">0</div><div class="l">с пометкой «важно»</div></div>
+    </div>
+    <div class="prog">
+      <div class="bar"><div class="fill" id="prog-fill"></div></div>
+      <div class="lbl"><b id="prog-done">0</b> / <span id="prog-total">0</span> отмечено как закрытые</div>
+    </div>
+    <div class="legend">
+      <span><span class="dot" style="background:var(--green)"></span> живой</span>
+      <span><span class="dot" style="background:var(--mut2)"></span> мёртвый</span>
+      <span><span class="dot" style="background:var(--blue)"></span> в веб-архиве</span>
+      <span><span class="dot" style="background:var(--amber)"></span> ⚑ важное (прочти пометку)</span>
+    </div>
+    <div class="note" id="intro-note">
+      <b>Как пользоваться:</b> ресурсы сгруппированы по типу. Жёлтая плашка ⚑ — то, что неочевидно и на что стоит обратить внимание (внутренний документ открыт в вебе, старый лендинг индексируется и т.п.). Внизу — кнопка выгрузить весь список ссылок текстом.
+    </div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="wrap" id="filters">
+    <div class="chip on" data-f="all">Все</div>
+    <div class="chip" data-f="ours">Наши</div>
+    <div class="chip" data-f="live">Живые</div>
+    <div class="chip" data-f="flag">⚑ Важные</div>
+    <div class="chip" data-f="todo">Не закрытые</div>
+    <input class="search" id="search" placeholder="поиск…">
+  </div>
+</div>
+
+<div class="wrap" id="sections"></div>
+
+<div class="cart">
+  <div class="wrap">
+    <div class="c-lbl">Список для юристов/команды: <b id="cart-n">0</b> ресурсов</div>
+    <button class="btn ghost" id="btn-reset">Сбросить галочки</button>
+    <button class="btn primary" id="btn-copy">📋 Скопировать все ссылки</button>
+  </div>
+</div>
+
+<div class="wrap"><div class="footer" id="footer-note"></div></div>
+
+<script src="data.js"></script>
+<script>
+const CATICON={ 'funnels':'🎓','union':'🤝','social':'📣','exchange':'💱','domains':'🌐','external':'💬','adjacent':'🧩','github':'💻','other':'📄' };
+const PLATICON={ 'telegram':'✈️','youtube':'▶️','vk':'🅥','instagram':'📷','tiktok':'🎵','twitter':'✖️','x':'✖️','дзен':'🅩','dzen':'🅩','teletype':'✍️','подкаст':'🎙️','podcast':'🎙️','mave':'🎙️','spotify':'🎧','apple':'🎙️','linkedin':'💼','facebook':'📘','threads':'🧵','medium':'Ⓜ️','notion':'📓','tilda':'🌐','github':'💻','link3':'🔗' };
+function iconFor(d){
+  const p=(d.platform||'').toLowerCase(), u=(d.url||'').toLowerCase();
+  for(const k in PLATICON){ if(p.includes(k)||u.includes(k)) return PLATICON[k]; }
+  return CATICON[d.category]||'📄';
+}
+const STLBL={live:'● живой',dead:'✕ мёртвый',archive:'📦 архив',redirect:'↪ редирект',unknown:'? неизвестно'};
+
+const KEY='cryptus_audit_done_v1';
+let done=new Set(JSON.parse(localStorage.getItem(KEY)||'[]'));
+function save(){localStorage.setItem(KEY,JSON.stringify([...done]))}
+function $(id){return document.getElementById(id)}
+let filter='all',q='';
+
+function idOf(d){return d.url||d.title}
+function card(d){
+  const el=document.createElement('div');el.className='item'+(done.has(idOf(d))?' done':'');
+  const st=(STLBL[d.status]||d.status);
+  const stc=d.status;
+  const shot=d.shot?`<img loading="lazy" src="shots/${d.shot}" alt="">`:`<div class="ph">${iconFor(d)}</div>`;
+  const link=d.url?`<a class="open" href="${d.url}" target="_blank" rel="noopener">Открыть ↗</a>`:`<span class="open" style="color:var(--mut2)">нет URL</span>`;
+  const urlline=d.url?`<a class="u" href="${d.url}" target="_blank" rel="noopener">${d.url.replace(/^https?:\/\//,'')}</a>`:'';
+  const flag=d.notable?`<div class="flag ${/доход|сотрудник|OKR|владени|приват/i.test(d.notable)?'priv':''}">⚑ ${d.notable}</div>`:'';
+  el.innerHTML=`
+    <a class="shot" href="${d.url||'#'}" target="_blank" rel="noopener">
+      ${shot}<span class="st ${stc}">${st}</span>
+    </a>
+    <div class="body">
+      <div class="type">${d.type||''}${d.platform?' · '+d.platform:''}</div>
+      <div class="name">${d.title||''}</div>
+      ${urlline}
+      <div class="what">${d.whatIsIt||''}</div>
+      ${flag}
+      <div class="foot">
+        <label><input type="checkbox" ${done.has(idOf(d))?'checked':''}> закрыто</label>
+        ${link}
+      </div>
+    </div>`;
+  el.querySelector('input').addEventListener('change',e=>{
+    const k=idOf(d); e.target.checked?done.add(k):done.delete(k);
+    el.classList.toggle('done',e.target.checked); save(); renderProg();
+    if(filter==='todo') render();
+  });
+  return el;
+}
+
+function passes(d){
+  if(q){const h=(d.title+' '+d.url+' '+d.whatIsIt+' '+d.type+' '+(d.platform||'')).toLowerCase();if(!h.includes(q))return false}
+  if(filter==='ours')return d.ours;
+  if(filter==='live')return d.status==='live';
+  if(filter==='flag')return !!d.notable;
+  if(filter==='todo')return !done.has(idOf(d));
+  return true;
+}
+function render(){
+  const host=$('sections');host.innerHTML='';
+  Object.keys(GROUPS).forEach(g=>{
+    const items=DATA.filter(d=>d.category===g&&passes(d));
+    if(!items.length)return;
+    const sec=document.createElement('section');
+    sec.innerHTML=`<div class="sec-head"><h2>${CATICON[g]||''} ${GROUPS[g].t}</h2><span class="cnt">${items.length}</span></div><div class="sec-desc">${GROUPS[g].d||''}</div>`;
+    const grid=document.createElement('div');grid.className='grid';
+    items.forEach(d=>grid.appendChild(card(d)));
+    sec.appendChild(grid);host.appendChild(sec);
+  });
+  // прочие категории, не описанные в GROUPS
+  const other=DATA.filter(d=>!GROUPS[d.category]&&passes(d));
+  if(other.length){const sec=document.createElement('section');sec.innerHTML=`<div class="sec-head"><h2>📄 Прочее</h2><span class="cnt">${other.length}</span></div>`;const grid=document.createElement('div');grid.className='grid';other.forEach(d=>grid.appendChild(card(d)));sec.appendChild(grid);host.appendChild(sec)}
+  if(!host.children.length)host.innerHTML='<p style="color:var(--mut);padding:30px 0">Ничего не найдено.</p>';
+}
+function renderStats(){
+  $('s-total').textContent=DATA.length;
+  $('s-ours').textContent=DATA.filter(d=>d.ours).length;
+  $('s-live').textContent=DATA.filter(d=>d.status==='live').length;
+  $('s-flag').textContent=DATA.filter(d=>d.notable).length;
+  $('cart-n').textContent=DATA.length;
+}
+function renderProg(){
+  const t=DATA.length,dn=DATA.filter(d=>done.has(idOf(d))).length;
+  $('prog-done').textContent=dn;$('prog-total').textContent=t;
+  $('prog-fill').style.width=t?(dn/t*100)+'%':'0';
+}
+$('filters').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;
+  document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));c.classList.add('on');filter=c.dataset.f;render()});
+$('search').addEventListener('input',e=>{q=e.target.value.trim().toLowerCase();render()});
+$('btn-reset').addEventListener('click',()=>{if(confirm('Сбросить все галочки «закрыто»?')){done.clear();save();render();renderProg()}});
+$('btn-copy').addEventListener('click',()=>{
+  const lines=['CRYPTUS — публичные ресурсы (карта для закрытия)',''];
+  Object.keys(GROUPS).forEach(g=>{const items=DATA.filter(d=>d.category===g);if(!items.length)return;
+    lines.push('## '+GROUPS[g].t);items.forEach(d=>{lines.push(`- ${d.title} — ${d.url||'(нет URL)'} [${d.status}]${d.notable?' ⚑ '+d.notable:''}`)});lines.push('')});
+  const txt=lines.join('\n');
+  navigator.clipboard.writeText(txt).then(()=>{const b=$('btn-copy');const t=b.textContent;b.textContent='✓ Скопировано';setTimeout(()=>b.textContent=t,1600)},()=>alert(txt));
+});
+$('date').textContent='17 июля 2026';
+$('footer-note').innerHTML='Инвентаризация: рой из 15 агентов + веб-архив + Certificate Transparency + прямая проверка HTTP · снимок на 17.07.2026 · '+DATA.length+' ресурсов. Документ доступен по ссылке, но закрыт от индексации поисковиками (noindex).';
+renderStats();render();renderProg();
+</script>
+</body>
+</html>
